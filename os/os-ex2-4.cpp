@@ -10,10 +10,10 @@ using namespace std;
 //生产者线程
 void producer(sbuf* p) {  
     int item;
-    uniform_int_distribution<unsigned> k(500, 1500);
-    static uniform_int_distribution<unsigned> u(1, 100);
+    uniform_int_distribution<unsigned> k(50, 500);
+    static uniform_int_distribution<unsigned> u(1000, 3000);
     static default_random_engine e(time(0)%3000);  //随机数引擎
-    for (int i = 0; i < 20; i++) {     //生产20次
+    for (int i = 0; i < 10; i++) {     //生产20次
         item = u(e);
         p->insert(item);
         Sleep(k(e));
@@ -22,9 +22,9 @@ void producer(sbuf* p) {
 
 //消费者线程
 void consumer(sbuf* p) {
-    uniform_int_distribution<unsigned> k(1000, 2000);
+    uniform_int_distribution<unsigned> k(100, 1500);
     default_random_engine v(time(0)%2000);    //随机数引擎
-    for (int i = 0; i < 20; i++) {     //消费20次
+    for (int i = 0; i < 10; i++) {     //消费20次
         p->remove();
         Sleep(k(v));
     }
